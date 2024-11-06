@@ -47,11 +47,6 @@ angular.json
 *.d.ts.map
 *.tsbuildinfo
 
-# Docker
-docker-compose.override.yml
-.dockerignore
-Dockerfile
-
 # TypeScript specific
 *.tsbuildinfo
 
