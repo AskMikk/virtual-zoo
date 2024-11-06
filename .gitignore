@@ -1,0 +1,81 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Dependency directories
+node_modules/
+bower_components/
+
+# Build directories
+dist/
+coverage/
+tmp/
+temp/
+.out/
+.cache/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Editor-specific files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+.cursor/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Angular specific
+.angular/
+.angular/cache
+.angular/cache/*
+angular.json
+
+# NestJS specific
+*.js.map
+*.d.ts
+*.d.ts.map
+*.tsbuildinfo
+
+# Docker
+docker-compose.override.yml
+.dockerignore
+Dockerfile
+
+# TypeScript specific
+*.tsbuildinfo
+
+# Generated files and compiled output
+*.swp
+*.swp~
+*.bak
+*.pid
+*.seed
+*.pid.lock
+.lock-wscript
+.lock-gyp
+
+# Ignore build artifacts and test outputs
+build/
+public/
+lib/
+tests/
+__pycache__/
+
+# Miscellaneous
+!.gitkeep
+# Secrets and sensitive files
+secrets/
+config/
+.secret/
+jwtRS256.key
