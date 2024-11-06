@@ -1,0 +1,14 @@
+<div class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 space-y-2">
+    @for (notification of notifications$ | async; track notification.id) {
+      <div 
+        class="p-4 rounded-lg shadow-lg min-w-[300px] text-center transform transition-all duration-300 ease-in-out"
+        [ngClass]="{
+          'bg-green-100 text-green-800 border-l-4 border-green-500': notification.type === 'success',
+          'bg-red-100 text-red-800 border-l-4 border-red-500': notification.type === 'delete',
+          'bg-blue-100 text-blue-800 border-l-4 border-blue-500': notification.type === 'info'
+        }"
+      >
+        {{ notification.message }}
+      </div>
+    }
+</div>

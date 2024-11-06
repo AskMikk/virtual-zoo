@@ -1,0 +1,83 @@
+<div class="min-h-screen bg-gray-50 dark:bg-gray-900 py-12">
+  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-3xl mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8">
+      <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+        {{ isEditMode ? 'Edit hologram' : 'Create new hologram' }}
+      </h1>
+
+      <form [formGroup]="hologramForm" (ngSubmit)="onSubmit()" class="space-y-8">
+        <div class="relative mb-8">
+          <label for="name" class="text-lg font-medium text-gray-700 dark:text-gray-300">Name</label>
+          <input
+            type="text"
+            id="name"
+            formControlName="name"
+            class="h-12 mt-1 block w-full rounded-lg border-2 border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-4 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            [ngClass]="{'border-red-300 dark:border-red-500': nameErrors}"
+            placeholder="Enter hologram name"
+          >
+          <div class="min-h-[20px] text-red-500 dark:text-red-400 text-sm mt-1">
+            {{ nameErrors }}
+          </div>
+        </div>
+
+        <div class="relative mb-8">
+          <label for="weight" class="text-lg font-medium text-gray-700 dark:text-gray-300">Weight</label>
+          <input
+            type="number"
+            id="weight"
+            formControlName="weight"
+            class="h-12 mt-1 block w-full rounded-lg border-2 border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-4 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            [ngClass]="{'border-red-300 dark:border-red-500': weightErrors}"
+            placeholder="Enter weight"
+          >
+          <div class="min-h-[20px] text-red-500 dark:text-red-400 text-sm mt-1">
+            {{ weightErrors }}
+          </div>
+        </div>
+
+        <div class="relative mb-8">
+          <label for="superpower" class="text-lg font-medium text-gray-700 dark:text-gray-300">Superpower</label>
+          <input
+            type="text"
+            id="superpower"
+            formControlName="superpower"
+            class="h-12 mt-1 block w-full rounded-lg border-2 border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-4 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+            [ngClass]="{'border-red-300 dark:border-red-500': superpowerErrors}"
+            placeholder="Enter superpower"
+          >
+          <div class="min-h-[20px] text-red-500 dark:text-red-400 text-sm mt-1">
+            {{ superpowerErrors }}
+          </div>
+        </div>
+
+        <div class="relative">
+          <label for="extinctSince" class="text-lg font-medium text-gray-700 dark:text-gray-300">Extinction date</label>
+          <input
+            type="date"
+            id="extinctSince"
+            formControlName="extinctSince"
+            class="h-12 mt-1 block w-full rounded-lg border-2 border-gray-300 dark:border-gray-600 shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 px-4 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
+          >
+        </div>
+
+        <div class="flex justify-end space-x-4 pt-6">
+          <button
+            type="button"
+            (click)="cancel()"
+            class="px-6 py-3 border-2 border-gray-300 dark:border-gray-600 rounded-lg shadow-sm text-base font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            [disabled]="!hologramForm.valid"
+            class="px-6 py-3 border-2 border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 disabled:bg-gray-400 dark:disabled:bg-gray-600 disabled:cursor-not-allowed transition-colors duration-200"
+          >
+            {{ isEditMode ? 'Save' : 'Create' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
