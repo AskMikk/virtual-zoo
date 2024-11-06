@@ -20,4 +20,4 @@ const options: DataSourceOptions & SeederOptions = {
   migrationsRun: true,
 };
 
-export const AppDataSource = new DataSource(options); 
+export const AppDataSource = new DataSource(options);

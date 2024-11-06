@@ -7,13 +7,12 @@ export const runSeeds = async () => {
     if (!AppDataSource.isInitialized) {
       await AppDataSource.initialize();
     }
-    
+
     console.log('Running seeds...');
     await runSeeders(AppDataSource, {
       seeds: [InitialDataSeeder],
     });
     console.log('Seeds completed successfully');
-    
   } catch (error) {
     console.error('Seeds failed:', error);
   } finally {
@@ -25,4 +24,4 @@ export const runSeeds = async () => {
 
 if (require.main === module) {
   runSeeds();
-} 
+}

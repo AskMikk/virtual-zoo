@@ -1,5 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 import { Hologram } from '../../models/hologram.model';
 import { HologramService } from './hologram.service';
 
@@ -10,7 +13,7 @@ describe('HologramService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [HologramService]
+      providers: [HologramService],
     });
     service = TestBed.inject(HologramService);
     httpMock = TestBed.inject(HttpTestingController);
@@ -26,11 +29,23 @@ describe('HologramService', () => {
 
   it('should get all holograms', () => {
     const testHolograms: Hologram[] = [
-      { id: 1, name: 'Test1', weight: 100, superpower: 'Flying', extinctSince: null },
-      { id: 2, name: 'Test2', weight: 200, superpower: 'Invisibility', extinctSince: null }
+      {
+        id: 1,
+        name: 'Test1',
+        weight: 100,
+        superpower: 'Flying',
+        extinctSince: null,
+      },
+      {
+        id: 2,
+        name: 'Test2',
+        weight: 200,
+        superpower: 'Invisibility',
+        extinctSince: null,
+      },
     ];
 
-    service.getHolograms().subscribe(holograms => {
+    service.getHolograms().subscribe((holograms) => {
       expect(holograms).toEqual(testHolograms);
     });
 
@@ -44,10 +59,10 @@ describe('HologramService', () => {
       name: 'Test',
       weight: 100,
       superpower: 'Flying',
-      extinctSince: null
+      extinctSince: null,
     };
 
-    service.createHologram(newHologram).subscribe(hologram => {
+    service.createHologram(newHologram).subscribe((hologram) => {
       expect(hologram).toEqual({ ...newHologram, id: 1 });
     });
 
@@ -62,10 +77,10 @@ describe('HologramService', () => {
       name: 'Updated',
       weight: 150,
       superpower: 'Flying',
-      extinctSince: null
+      extinctSince: null,
     };
 
-    service.updateHologram(1, updatedHologram).subscribe(hologram => {
+    service.updateHologram(1, updatedHologram).subscribe((hologram) => {
       expect(hologram).toEqual(updatedHologram);
     });
 
@@ -75,7 +90,7 @@ describe('HologramService', () => {
   });
 
   it('should delete a hologram', () => {
-    service.deleteHologram(1).subscribe(response => {
+    service.deleteHologram(1).subscribe((response) => {
       expect(response).toBeNull();
     });
 
@@ -83,4 +98,4 @@ describe('HologramService', () => {
     expect(req.request.method).toBe('DELETE');
     req.flush(null);
   });
-}); 
+});

@@ -3,6 +3,6 @@ import { DefaultPipe } from './pipes/default.pipe';
 
 @NgModule({
   declarations: [DefaultPipe],
-  exports: [DefaultPipe]
+  exports: [DefaultPipe],
 })
-export class SharedModule { } 
+export class SharedModule {}

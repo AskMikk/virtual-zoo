@@ -2,8 +2,10 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Hologram } from '../entities/hologram.entity';
-import { CreateHologramDto, UpdateHologramDto } from '../dtos/base-hologram.dto';
-
+import {
+  CreateHologramDto,
+  UpdateHologramDto,
+} from '../dtos/base-hologram.dto';
 
 @Injectable()
 export class HologramsService {
@@ -28,7 +30,10 @@ export class HologramsService {
     return this.hologramsRepository.save(createHologramDto);
   }
 
-  async update(id: number, updateHologramDto: UpdateHologramDto): Promise<Hologram> {
+  async update(
+    id: number,
+    updateHologramDto: UpdateHologramDto,
+  ): Promise<Hologram> {
     await this.hologramsRepository.update(id, updateHologramDto);
     return this.findOne(id);
   }

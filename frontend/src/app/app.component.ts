@@ -7,7 +7,7 @@ import { NotificationsComponent } from './features/notifications/notifications.c
   standalone: true,
   imports: [RouterOutlet, NotificationsComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrl: './app.component.css',
 })
 export class AppComponent {
   title = 'frontend';

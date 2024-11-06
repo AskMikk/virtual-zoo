@@ -13,24 +13,34 @@ describe('HologramFormComponent', () => {
   let notificationService: jasmine.SpyObj<NotificationService>;
 
   beforeEach(async () => {
-    const hologramSpy = jasmine.createSpyObj('HologramService', ['getHologram', 'createHologram', 'updateHologram']);
-    const notificationSpy = jasmine.createSpyObj('NotificationService', ['show']);
+    const hologramSpy = jasmine.createSpyObj('HologramService', [
+      'getHologram',
+      'createHologram',
+      'updateHologram',
+    ]);
+    const notificationSpy = jasmine.createSpyObj('NotificationService', [
+      'show',
+    ]);
 
     await TestBed.configureTestingModule({
       imports: [HologramFormComponent, ReactiveFormsModule],
       providers: [
         provideRouter([
           { path: 'holograms', component: HologramFormComponent },
-          { path: 'holograms/:id', component: HologramFormComponent }
+          { path: 'holograms/:id', component: HologramFormComponent },
         ]),
         { provide: HologramService, useValue: hologramSpy },
-        { provide: NotificationService, useValue: notificationSpy }
-      ]
+        { provide: NotificationService, useValue: notificationSpy },
+      ],
     }).compileComponents();
 
-    hologramService = TestBed.inject(HologramService) as jasmine.SpyObj<HologramService>;
-    notificationService = TestBed.inject(NotificationService) as jasmine.SpyObj<NotificationService>;
-    
+    hologramService = TestBed.inject(
+      HologramService,
+    ) as jasmine.SpyObj<HologramService>;
+    notificationService = TestBed.inject(
+      NotificationService,
+    ) as jasmine.SpyObj<NotificationService>;
+
     fixture = TestBed.createComponent(HologramFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -50,11 +60,11 @@ describe('HologramFormComponent', () => {
   it('should validate required fields', () => {
     const form = component.hologramForm;
     expect(form.valid).toBeFalsy();
-    
+
     form.controls['name'].setValue('Test');
     form.controls['weight'].setValue(100);
     form.controls['superpower'].setValue('Flying');
-    
+
     expect(form.valid).toBeTruthy();
   });
 
@@ -62,7 +72,7 @@ describe('HologramFormComponent', () => {
     const nameControl = component.hologramForm.controls['name'];
     nameControl.setValue('A');
     expect(nameControl.errors?.['minlength']).toBeTruthy();
-    
+
     nameControl.setValue('Ab');
     expect(nameControl.errors).toBeNull();
   });
@@ -71,7 +81,7 @@ describe('HologramFormComponent', () => {
     const weightControl = component.hologramForm.controls['weight'];
     weightControl.setValue(-1);
     expect(weightControl.errors?.['min']).toBeTruthy();
-    
+
     weightControl.setValue(0);
     expect(weightControl.errors).toBeNull();
   });
@@ -81,15 +91,18 @@ describe('HologramFormComponent', () => {
       name: 'Test',
       weight: 100,
       superpower: 'Flying',
-      extinctSince: null
+      extinctSince: null,
     };
-    
+
     hologramService.createHologram.and.returnValue(of(testHologram));
-    
+
     component.hologramForm.patchValue(testHologram);
     component.onSubmit();
-    
+
     expect(hologramService.createHologram).toHaveBeenCalledWith(testHologram);
-    expect(notificationService.show).toHaveBeenCalledWith('Hologram created successfully', 'success');
+    expect(notificationService.show).toHaveBeenCalledWith(
+      'Hologram created successfully',
+      'success',
+    );
   });
 });

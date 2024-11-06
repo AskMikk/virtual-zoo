@@ -5,6 +5,6 @@ import { DefaultPipe } from './default.pipe';
 @NgModule({
   declarations: [DefaultPipe],
   imports: [CommonModule],
-  exports: [DefaultPipe]
+  exports: [DefaultPipe],
 })
-export class PipesModule { } 
+export class PipesModule {}

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Hologram } from '../../models/hologram.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class HologramService {
   private apiUrl = 'http://localhost:3000/holograms';

@@ -6,10 +6,10 @@ import { ThemeService } from '../../services/theme/theme.service';
   selector: 'app-theme-toggle',
   standalone: true,
   imports: [CommonModule],
-  templateUrl: './theme-toggle.component.html'
+  templateUrl: './theme-toggle.component.html',
 })
 export class ThemeToggleComponent {
   isDark$ = this.themeService.isDarkTheme$;
 
   constructor(public themeService: ThemeService) {}
-} 
+}

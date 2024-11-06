@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HologramService } from '../../../shared/services/holograms/hologram.service';
 import { Hologram } from '../../../shared/models/hologram.model';
@@ -10,7 +16,12 @@ import { NotificationService } from '../../../shared/services/notifications/noti
 @Component({
   selector: 'app-hologram-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, NotificationsComponent],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    NotificationsComponent,
+  ],
   templateUrl: './hologram-form.component.html',
 })
 export class HologramFormComponent implements OnInit {
@@ -23,13 +34,13 @@ export class HologramFormComponent implements OnInit {
     private hologramService: HologramService,
     private router: Router,
     private route: ActivatedRoute,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
   ) {
     this.hologramForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       weight: ['', [Validators.required, Validators.min(0)]],
       superpower: ['', Validators.required],
-      extinctSince: ['']
+      extinctSince: [''],
     });
   }
 
@@ -43,12 +54,12 @@ export class HologramFormComponent implements OnInit {
   }
 
   loadHologram(id: number): void {
-    this.hologramService.getHologram(id).subscribe(hologram => {
+    this.hologramService.getHologram(id).subscribe((hologram) => {
       this.hologramForm.patchValue({
         name: hologram.name,
         weight: hologram.weight,
         superpower: hologram.superpower,
-        extinctSince: hologram.extinctSince
+        extinctSince: hologram.extinctSince,
       });
     });
   }
@@ -60,30 +71,38 @@ export class HologramFormComponent implements OnInit {
         name: formValue.name,
         weight: formValue.weight,
         superpower: formValue.superpower,
-        extinctSince: formValue.extinctSince ? formValue.extinctSince : null
+        extinctSince: formValue.extinctSince ? formValue.extinctSince : null,
       };
 
       if (this.isEditMode && this.hologramId) {
-        this.hologramService.updateHologram(this.hologramId, hologramData).subscribe({
-          next: () => {
-            this.router.navigate(['/holograms']);
-            this.notificationService.show('Hologram updated successfully', 'success');
-          },
-          error: (error) => {
-            console.error('Error updating hologram:', error);
-            this.notificationService.show('Error updating hologram', 'info');
-          }
-        });
+        this.hologramService
+          .updateHologram(this.hologramId, hologramData)
+          .subscribe({
+            next: () => {
+              this.router.navigate(['/holograms']);
+              this.notificationService.show(
+                'Hologram updated successfully',
+                'success',
+              );
+            },
+            error: (error) => {
+              console.error('Error updating hologram:', error);
+              this.notificationService.show('Error updating hologram', 'info');
+            },
+          });
       } else {
         this.hologramService.createHologram(hologramData).subscribe({
           next: () => {
             this.router.navigate(['/holograms']);
-            this.notificationService.show('Hologram created successfully', 'success');
+            this.notificationService.show(
+              'Hologram created successfully',
+              'success',
+            );
           },
           error: (error) => {
             console.error('Error creating hologram:', error);
             this.notificationService.show('Error creating hologram', 'info');
-          }
+          },
         });
       }
     }

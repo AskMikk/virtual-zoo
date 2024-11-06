@@ -6,25 +6,19 @@ import { Routes } from '@angular/router';
 import { provideRouter } from '@angular/router';
 
 const routes: Routes = [
-  { path: 'holograms', component: HologramTableComponent }
+  { path: 'holograms', component: HologramTableComponent },
 ];
 
 describe('HologramTableComponent', () => {
   let component: HologramTableComponent;
   let fixture: ComponentFixture<HologramTableComponent>;
-  
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [
-        HologramTableComponent,
-        HttpClientTestingModule
-      ],
-      providers: [
-        HologramService,
-        provideRouter(routes)
-      ]
+      imports: [HologramTableComponent, HttpClientTestingModule],
+      providers: [HologramService, provideRouter(routes)],
     }).compileComponents();
-    
+
     fixture = TestBed.createComponent(HologramTableComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

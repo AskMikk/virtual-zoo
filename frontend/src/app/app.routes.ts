@@ -6,5 +6,5 @@ export const routes: Routes = [
   { path: '', redirectTo: 'holograms', pathMatch: 'full' },
   { path: 'holograms', component: HologramTableComponent },
   { path: 'holograms/create', component: HologramFormComponent },
-  { path: 'holograms/edit/:id', component: HologramFormComponent }
+  { path: 'holograms/edit/:id', component: HologramFormComponent },
 ];

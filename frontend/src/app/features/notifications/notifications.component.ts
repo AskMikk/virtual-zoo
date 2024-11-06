@@ -12,4 +12,4 @@ export class NotificationsComponent {
   notifications$ = this.notificationService.getNotifications();
 
   constructor(private notificationService: NotificationService) {}
-} 
+}

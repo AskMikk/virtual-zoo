@@ -1,6 +1,17 @@
-import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Put,
+  Delete,
+  Body,
+  Param,
+} from '@nestjs/common';
 import { HologramsService } from '../services/holograms.service';
-import { CreateHologramDto, UpdateHologramDto } from '../dtos/base-hologram.dto';
+import {
+  CreateHologramDto,
+  UpdateHologramDto,
+} from '../dtos/base-hologram.dto';
 
 @Controller('holograms')
 export class HologramsController {
@@ -22,7 +33,10 @@ export class HologramsController {
   }
 
   @Put(':id')
-  update(@Param('id') id: string, @Body() updateHologramDto: UpdateHologramDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateHologramDto: UpdateHologramDto,
+  ) {
     return this.hologramsService.update(+id, updateHologramDto);
   }
 

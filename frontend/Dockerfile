@@ -1,4 +1,4 @@
-FROM node:20-alpine as build
+FROM node:20-alpine AS build
 WORKDIR /app
 RUN apk add --no-cache chromium chromium-chromedriver udev ttf-freefont
 RUN mkdir -p /app/.angular/cache && chmod -R 777 /app/.angular

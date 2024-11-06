@@ -7,7 +7,9 @@ import { mockHologram } from '../test/mock-data';
 const mockHologramRepository = {
   find: jest.fn().mockResolvedValue([mockHologram]),
   findOneBy: jest.fn().mockResolvedValue(mockHologram),
-  save: jest.fn().mockImplementation((dto) => Promise.resolve({ id: 1, ...dto }))
+  save: jest
+    .fn()
+    .mockImplementation((dto) => Promise.resolve({ id: 1, ...dto })),
 };
 
 describe('HologramsService', () => {
@@ -19,8 +21,8 @@ describe('HologramsService', () => {
         HologramsService,
         {
           provide: getRepositoryToken(Hologram),
-          useValue: mockHologramRepository  
-        }
+          useValue: mockHologramRepository,
+        },
       ],
     }).compile();
 
@@ -48,7 +50,7 @@ describe('HologramsService', () => {
       name: 'New',
       weight: 150,
       superpower: 'Invisibility',
-      extinctSince: undefined
+      extinctSince: undefined,
     };
     const result = await service.create(dto);
     expect(result).toEqual({ id: 1, ...dto });

@@ -13,11 +13,11 @@ import { NotificationService } from '../../../shared/services/notifications/noti
   selector: 'app-hologram-table',
   standalone: true,
   imports: [
-    CommonModule, 
-    FormsModule, 
-    NotificationsComponent, 
-    ThemeToggleComponent, 
-    PipesModule
+    CommonModule,
+    FormsModule,
+    NotificationsComponent,
+    ThemeToggleComponent,
+    PipesModule,
   ],
   templateUrl: './hologram-table.component.html',
 })
@@ -28,10 +28,19 @@ export class HologramTableComponent implements OnInit {
   searchTerm: string = '';
   sortField: keyof Hologram = 'name';
   sortDirection: 'asc' | 'desc' = 'asc';
-  tableHeaders: (keyof Hologram)[] = ['name', 'weight', 'superpower', 'extinctSince'];
+  tableHeaders: (keyof Hologram)[] = [
+    'name',
+    'weight',
+    'superpower',
+    'extinctSince',
+  ];
   selectedHologram?: Hologram;
 
-  constructor(private notificationService: NotificationService, private hologramService: HologramService, private router: Router) {}
+  constructor(
+    private notificationService: NotificationService,
+    private hologramService: HologramService,
+    private router: Router,
+  ) {}
 
   ngOnInit() {
     this.loadHolograms();
@@ -39,13 +48,13 @@ export class HologramTableComponent implements OnInit {
 
   loadHolograms() {
     this.hologramService.getHolograms().subscribe(
-      data => {
+      (data) => {
         this.holograms = data;
         this.applyFilters();
       },
-      error => {
+      (error) => {
         console.error('Error loading holograms:', error);
-      }
+      },
     );
   }
 
@@ -57,10 +66,10 @@ export class HologramTableComponent implements OnInit {
   }
 
   applyFilters() {
-    this.filteredHolograms = this.holograms.filter(hologram =>
-      Object.values(hologram).some(value =>
-        String(value).toLowerCase().includes(this.searchTerm.toLowerCase())
-      )
+    this.filteredHolograms = this.holograms.filter((hologram) =>
+      Object.values(hologram).some((value) =>
+        String(value).toLowerCase().includes(this.searchTerm.toLowerCase()),
+      ),
     );
     this.sortHolograms();
   }
@@ -69,7 +78,7 @@ export class HologramTableComponent implements OnInit {
     this.filteredHolograms.sort((a, b) => {
       const aValue = a[this.sortField] ?? '';
       const bValue = b[this.sortField] ?? '';
-      
+
       if (this.sortDirection === 'asc') {
         return aValue < bValue ? -1 : 1;
       } else {
@@ -94,15 +103,19 @@ export class HologramTableComponent implements OnInit {
 
   onSubmitHologram(hologram: Partial<Hologram>): void {
     if (this.selectedHologram) {
-      this.hologramService.updateHologram(this.selectedHologram.id!, hologram as Hologram).subscribe(() => {
-        this.loadHolograms();
-        this.selectedHologram = undefined;
-      });
+      this.hologramService
+        .updateHologram(this.selectedHologram.id!, hologram as Hologram)
+        .subscribe(() => {
+          this.loadHolograms();
+          this.selectedHologram = undefined;
+        });
     } else {
-      this.hologramService.createHologram(hologram as Hologram).subscribe(() => {
-        this.loadHolograms();
-        this.selectedHologram = undefined;
-      });
+      this.hologramService
+        .createHologram(hologram as Hologram)
+        .subscribe(() => {
+          this.loadHolograms();
+          this.selectedHologram = undefined;
+        });
     }
   }
 
@@ -116,27 +129,37 @@ export class HologramTableComponent implements OnInit {
 
   getStatistics() {
     if (!this.holograms.length) return null;
-    
-    const heaviest = this.holograms.reduce((prev, current) => 
-      (prev.weight > current.weight) ? prev : current
+
+    const heaviest = this.holograms.reduce((prev, current) =>
+      prev.weight > current.weight ? prev : current,
     );
-    
+
     const extinctDates = this.holograms
-      .filter(h => h.extinctSince)
-      .map(h => new Date(h.extinctSince!));
-    
-    const extinctTimestamps = extinctDates.map(date => date.getTime());
-    
-    const mostRecent = extinctDates.length ? 
-      this.holograms.find(h => new Date(h.extinctSince!).getTime() === Math.max(...extinctTimestamps)) : null;
-    const oldest = extinctDates.length ?
-      this.holograms.find(h => new Date(h.extinctSince!).getTime() === Math.min(...extinctTimestamps)) : null;
-    
+      .filter((h) => h.extinctSince)
+      .map((h) => new Date(h.extinctSince!));
+
+    const extinctTimestamps = extinctDates.map((date) => date.getTime());
+
+    const mostRecent = extinctDates.length
+      ? this.holograms.find(
+          (h) =>
+            new Date(h.extinctSince!).getTime() ===
+            Math.max(...extinctTimestamps),
+        )
+      : null;
+    const oldest = extinctDates.length
+      ? this.holograms.find(
+          (h) =>
+            new Date(h.extinctSince!).getTime() ===
+            Math.min(...extinctTimestamps),
+        )
+      : null;
+
     return {
       total: this.holograms.length,
       heaviest,
       mostRecent,
-      oldest
+      oldest,
     };
   }
 

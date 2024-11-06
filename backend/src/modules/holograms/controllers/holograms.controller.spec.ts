@@ -16,12 +16,16 @@ describe('HologramsController', () => {
           useValue: {
             findAll: jest.fn().mockResolvedValue([mockHologram]),
             findOne: jest.fn().mockResolvedValue(mockHologram),
-            create: jest.fn().mockImplementation(dto => Promise.resolve({ id: 1, ...dto })),
-            update: jest.fn().mockImplementation((id, dto) => Promise.resolve({ id, ...dto })),
-            remove: jest.fn().mockResolvedValue(undefined)
-          }
-        }
-      ]
+            create: jest
+              .fn()
+              .mockImplementation((dto) => Promise.resolve({ id: 1, ...dto })),
+            update: jest
+              .fn()
+              .mockImplementation((id, dto) => Promise.resolve({ id, ...dto })),
+            remove: jest.fn().mockResolvedValue(undefined),
+          },
+        },
+      ],
     }).compile();
 
     controller = module.get<HologramsController>(HologramsController);
@@ -54,7 +58,7 @@ describe('HologramsController', () => {
         name: 'New',
         weight: 150,
         superpower: 'Invisibility',
-        extinctSince: undefined
+        extinctSince: undefined,
       };
       const result = await controller.create(dto);
       expect(result).toEqual({ id: 1, ...dto });
@@ -68,7 +72,7 @@ describe('HologramsController', () => {
         name: 'Updated',
         weight: 200,
         superpower: 'Flying',
-        extinctSince: undefined
+        extinctSince: undefined,
       };
       const result = await controller.update('1', dto);
       expect(result).toEqual({ id: 1, ...dto });
