@@ -26,7 +26,7 @@
             Total Holograms
           </div>
           <div class="text-2xl font-bold text-gray-900 dark:text-white">
-            {{ getDefaultValue(getStatistics()?.total, 0) }}
+            {{ getStatistics()?.total ?? 0 }}
           </div>
         </div>
 
@@ -39,10 +39,10 @@
             Heaviest Hologram
           </div>
           <div class="text-2xl font-bold text-gray-900 dark:text-white">
-            {{ getDefaultValue(getStatistics()?.heaviest?.weight, 0) }}
+            {{ getStatistics()?.heaviest?.weight ?? 0 }}
           </div>
           <div class="text-sm text-gray-600 dark:text-gray-300">
-            {{ getDefaultValue(getStatistics()?.heaviest?.name, "") }}
+            {{ getStatistics()?.heaviest?.name ?? 'N/A' }}
           </div>
         </div>
 
@@ -55,15 +55,10 @@
             Most Recently Extinct
           </div>
           <div class="text-2xl font-bold text-gray-900 dark:text-white">
-            {{ getDefaultValue(getStatistics()?.mostRecent?.name, "N/A") }}
+            {{ getStatistics()?.mostRecent?.name ?? 'N/A' }}
           </div>
           <div class="text-sm text-gray-600 dark:text-gray-300">
-            {{
-              getDefaultValue(
-                getStatistics()?.mostRecent?.extinctSince | date,
-                "No data"
-              )
-            }}
+            {{ getStatistics()?.mostRecent?.extinctSince ?? 'No data' }}
           </div>
         </div>
 
@@ -76,15 +71,10 @@
             First Extinct
           </div>
           <div class="text-2xl font-bold text-gray-900 dark:text-white">
-            {{ getDefaultValue(getStatistics()?.oldest?.name, "N/A") }}
+            {{ getStatistics()?.oldest?.name ?? 'N/A' }}
           </div>
           <div class="text-sm text-gray-600 dark:text-gray-300">
-            {{
-              getDefaultValue(
-                getStatistics()?.oldest?.extinctSince | date,
-                "No data"
-              )
-            }}
+            {{ getStatistics()?.oldest?.extinctSince ?? 'No data' }}
           </div>
         </div>
       </div>

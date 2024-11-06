@@ -6,7 +6,6 @@ import { Hologram } from '../../../shared/models/hologram.model';
 import { Router } from '@angular/router';
 import { NotificationsComponent } from '../../notifications/notifications.component';
 import { ThemeToggleComponent } from '../../../shared/components/theme-toggle/theme-toggle.component';
-import { PipesModule } from '../../../shared/pipes/pipes.module';
 import { NotificationService } from '../../../shared/services/notifications/notification.service';
 
 @Component({
@@ -17,12 +16,10 @@ import { NotificationService } from '../../../shared/services/notifications/noti
     FormsModule,
     NotificationsComponent,
     ThemeToggleComponent,
-    PipesModule,
   ],
   templateUrl: './hologram-table.component.html',
 })
 export class HologramTableComponent implements OnInit {
-  isLoading: boolean = true;
   holograms: Hologram[] = [];
   filteredHolograms: Hologram[] = [];
   searchTerm: string = '';
@@ -34,7 +31,6 @@ export class HologramTableComponent implements OnInit {
     'superpower',
     'extinctSince',
   ];
-  selectedHologram?: Hologram;
 
   constructor(
     private notificationService: NotificationService,
@@ -99,28 +95,6 @@ export class HologramTableComponent implements OnInit {
 
   createHologram(): void {
     this.router.navigate(['/holograms/create']);
-  }
-
-  onSubmitHologram(hologram: Partial<Hologram>): void {
-    if (this.selectedHologram) {
-      this.hologramService
-        .updateHologram(this.selectedHologram.id!, hologram as Hologram)
-        .subscribe(() => {
-          this.loadHolograms();
-          this.selectedHologram = undefined;
-        });
-    } else {
-      this.hologramService
-        .createHologram(hologram as Hologram)
-        .subscribe(() => {
-          this.loadHolograms();
-          this.selectedHologram = undefined;
-        });
-    }
-  }
-
-  onCancelForm(): void {
-    this.selectedHologram = undefined;
   }
 
   editHologram(id: number): void {
