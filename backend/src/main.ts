@@ -19,9 +19,10 @@ async function bootstrap() {
   const configService = app.get(ConfigService);
   
   app.enableCors({
-    origin: configService.get('CORS_ORIGIN'),
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    origin: [configService.get('CORS_ORIGIN') || 'http://localhost:4200'],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
+    allowedHeaders: 'Content-Type, Accept, Authorization'
   });
   
   await runSeeds();

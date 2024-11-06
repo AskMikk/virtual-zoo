@@ -39,7 +39,6 @@ Thumbs.db
 .angular/
 .angular/cache
 .angular/cache/*
-angular.json
 
 # NestJS specific
 *.js.map
